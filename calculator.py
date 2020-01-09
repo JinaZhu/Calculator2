@@ -9,15 +9,15 @@ from arithmetic import *
 def calculator_with_3(symbol, num1, num2):
     # add, sub, div, pow, mod
     if symbol == "+":
-        print(add(num1, num2))
+        return add(num1, num2)
     elif symbol == "-":
-        print(subtract(num1, num2))
+        return subtract(num1, num2)
     elif symbol == "/":
-        print(divide(num1, num2))
+        return divide(num1, num2)
     elif symbol == "pow":
-        print(power(num1, num2))
+        return power(num1, num2)
     elif symbol == "mod":
-        print(mod(num1, num2))
+        return mod(num1, num2)
     else:
         print("Invalid entry! Try again.")
     # if/elif/else add....etc print the function in arithmetric
@@ -25,9 +25,9 @@ def calculator_with_3(symbol, num1, num2):
 
 def calculator_with_2(symbol, num1):
     if symbol == "square":
-        print(square(num1))
+        return square(num1)
     elif symbol == "cube":
-        print(cube(num1))
+        return cube(num1)
     else:
         print("Invalid entry! Try again.")
 
@@ -35,19 +35,49 @@ def calculator_with_2(symbol, num1):
 def tokenize():
     print("What do you want to calculate?")
     print("Give us an input.")
-    print("example: +, 3, 4 will calculate 3 + 4")
+    print("""
+        Keys
+        +: add
+        -: subtract
+        /: divide
+        mod: remainder
+        pow: power
+        square: square
+        cube: cube
+        """)
+    print("example: [key first number second number], [+ 2 4] **exclude brackets")
     nums = input("> ")
-    split = nums.split(",")
+    split = nums.split(" ")
+    #print(split)
+
     if len(split) == 3:
-        calculator_with_3(split[0], float(split[1]), float(split[2]))
+        return calculator_with_3(split[0], float(split[1]), float(split[2]))
     elif len(split) == 2:
-        calculator_with_2(split[0], float(split[1]))
+        return calculator_with_2(split[0], float(split[1]))
     else:
         print("Invalid, try again!")
 
+def repeat():
+    cont = input("Will you like to keep going? yes or q to quit. ")
 
-test = tokenize()
-print(test)
+    while True:
+        if cont == "q":
+            return tokenize()
+        elif cont == "yes":
+            print(tokenize())
+            repeat()
+        else:
+            return "invalid entry"
+
+
+    
+
+
+
+print(tokenize())
+print(repeat())
+
+
 
     # # No setup
     # repeat forever:
